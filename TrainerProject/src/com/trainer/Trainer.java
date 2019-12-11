@@ -5,22 +5,16 @@ public class Trainer implements TrainerAction{
 	
 	private TrainingManager trainingManager;
 	private int trainerID;
-	private List<Training> trainingList;
-	
-	
-	
+
 	// Received instance from Training Manager
 	Trainer() {
 		this.trainingManager = TrainingManager.getInstance();
-		
-
 	}
 
 	
 	Trainer(int tid) {
 		this.trainingManager = TrainingManager.getInstance();
 		this.trainerID = tid;
-		this.trainingList = trainingManager.getTrainingMap().get(trainerID);
 	} 
 
 	
@@ -30,26 +24,18 @@ public class Trainer implements TrainerAction{
 	}
 
 	public void setTrainerID(int trainerID) {
-		this.setTrainingList(trainerID);
 		this.trainerID = trainerID;
 	}
 
-	public List<Training> getTrainingList() {
-		return this.trainingList;
+	public List<Training> getMyTrainingList(){
+		return this.trainingManager.getTrainingMap().get(this.trainerID);
 	}
-
-	public void setTrainingList(int trainerID) {
-		this.trainingList = trainingManager.getTrainingMap().get(trainerID);
-		System.out.println("Size" + this.trainingList.size());
-	}
-
-	
 
 	@Override
 	public int getTrainingCountWithinDates(CDate start, CDate end) {
-		// TODO Auto-generated method stub
+
 			int countOfTrainings = 0;
-		for (Training tEntry : this.trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 			
 			boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
 			boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
@@ -69,7 +55,7 @@ public class Trainer implements TrainerAction{
 			
 			double costOfTrainings = 0;
 			
-			for (Training tEntry : trainingList){
+			for (Training tEntry : this.getMyTrainingList()){
 			
 			boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
 			boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
@@ -86,7 +72,7 @@ public class Trainer implements TrainerAction{
 		// TODO Auto-generated method stub
 		double costOfTrainings = 0;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 		
 		if(tEntry.getCourseName().equalsIgnoreCase(courseName)){
 			costOfTrainings += tEntry.getCost();
@@ -103,7 +89,7 @@ public class Trainer implements TrainerAction{
 		
 		boolean nFlag = false;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 		
 		boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
 		boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
@@ -122,7 +108,7 @@ public class Trainer implements TrainerAction{
 		// TODO Auto-generated method stub
 		int countOfTraining = 0;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 		
 		if(tEntry.getClientName().equalsIgnoreCase(client)){
 			countOfTraining++;
@@ -137,7 +123,7 @@ public class Trainer implements TrainerAction{
 		
 		double pendingCostOnCompletedTrainings = 0;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 			
 			if(tEntry.getStatus().equalsIgnoreCase(MACROS.COMPLETED) && tEntry.getPayState().equalsIgnoreCase(MACROS.DUE))
 				pendingCostOnCompletedTrainings += tEntry.getCost();
@@ -196,9 +182,9 @@ public class Trainer implements TrainerAction{
 		
 		System.out.println("Sorted Based on Criteria : " + Training.getCriteria() + " | " + criteriaFlag);
 			
-		Collections.sort(trainingList);
+		Collections.sort(this.getMyTrainingList());
 		
-		for(Training tEntry : trainingList){
+		for(Training tEntry : this.getMyTrainingList()){
 			
 			System.out.println(tEntry + "\n");
 			
@@ -212,7 +198,7 @@ public class Trainer implements TrainerAction{
 		
 		boolean pFlag = false;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 			
 			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED)){
 					System.out.println(tEntry + "\n");
@@ -230,7 +216,7 @@ public class Trainer implements TrainerAction{
 		
 		boolean pFlag = false;
 		
-		for (Training tEntry : trainingList){
+		for (Training tEntry : this.getMyTrainingList()){
 			
 			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED) && tEntry.getClientName().equalsIgnoreCase(courseName)){
 					System.out.println(tEntry + "\n");
