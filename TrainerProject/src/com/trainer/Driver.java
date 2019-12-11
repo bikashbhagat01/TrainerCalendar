@@ -16,8 +16,8 @@ public class Driver  {
 		// Parameterized Constructor
 		public Driver(int i) {
 			// TODO Auto-generated constructor stub
-			this.trainer = new Trainer();
-			this.setTrainer(i);
+			this.trainer = new Trainer(i);
+			//this.trainer.setTrainerID(i);
 		}
 		
 		
@@ -26,10 +26,6 @@ public class Driver  {
 			return this.trainer;
 		}
 		
-		public  void setTrainer(int trainerID){
-			
-			this.trainer.setTrainerID(trainerID);
-		}
 		
 		
 	public static void main(String[] args) {
@@ -43,16 +39,15 @@ public class Driver  {
 		// Trainer trainer = new Driver(trainerID).getTrainer(); // To get only trainer Instance
 		
 		Driver driver = new Driver(trainerID); // Driver instance returned
-		Trainer trainer = driver.getTrainer();
 		String choice;
 		CDate[] dateArray;
 		String course;
 		String client;
 		String sortCriteria;
 		
-		System.out.println("Set -> Trainer ID : " + trainer.getTrainerID());
+		System.out.println("Set -> Trainer ID : " + driver.trainer.getTrainerID());
 		
-		trainer = driver.initiator();
+		driver.initiator();
 		
 		System.out.println("\n Launched Training Data Initiator \n ");
 		
@@ -72,51 +67,51 @@ public class Driver  {
 				
 				dateArray = driver.getDates();
 				System.out.println("Count of Training within dates - " + dateArray[0] + " & " + dateArray[1]);
-				System.out.println(trainer.getTrainingCountWithinDates(dateArray[0], dateArray[1]));
+				System.out.println(driver.trainer.getTrainingCountWithinDates(dateArray[0], dateArray[1]));
 				
 				break;
 				
 			case "b":
 				dateArray = driver.getDates();
-				System.out.println(trainer.getTotalCostOfTrainingWithinDates(dateArray[0], dateArray[1]));
+				System.out.println(driver.trainer.getTotalCostOfTrainingWithinDates(dateArray[0], dateArray[1]));
 				
 				break;
 				
 			case "c":
 				course = driver.getCourse();
 				System.out.println("Total Cost of training for technology : " + course);
-				System.out.println(trainer.getTotalCostOfTrainingWithCourseName(course));
+				System.out.println(driver.trainer.getTotalCostOfTrainingWithCourseName(course));
 				break;
 				
 			case "d":
 				dateArray = driver.getDates();
 				course = driver.getCourse();
-				trainer.displayTrainingInfoWithinDates(dateArray[0], dateArray[1], course);
+				driver.trainer.displayTrainingInfoWithinDates(dateArray[0], dateArray[1], course);
 				break;
 				/*
 				void displayPlannedTrainings(String courseName);
 				*/
 			case "e":
 				client = driver.getClient();
-				trainer.displayTotalCountOfTrainingsForClient(client);
+				driver.trainer.displayTotalCountOfTrainingsForClient(client);
 				break;
 				
 			case "f":
-				trainer.displayPendingCostOnCompletedTrainings();
+				driver.trainer.displayPendingCostOnCompletedTrainings();
 				break;
 				
 			case "g":
 				sortCriteria = driver.getCriteria();
-				trainer.sortAllTrainings(sortCriteria);
+				driver.trainer.sortAllTrainings(sortCriteria);
 				break;
 				
 			case "h":
-				trainer.displayPlannedTrainings();
+				driver.trainer.displayPlannedTrainings();
 				break;
 				
 			case "i":
 				course = driver.getCourse();
-				trainer.displayPlannedTrainings(course);
+				driver.trainer.displayPlannedTrainings(course);
 				break;
 			
 			case "q":
@@ -134,7 +129,7 @@ public class Driver  {
 	
 	}
 	
-	Trainer initiator(){
+	void initiator(){
 
 		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019),MACROS.CONFIRMED ,MACROS.DUE, 4);
 		this.trainer.addTraining( "SOLID", "Amazon", 50000, new CDate(1,12,2019),MACROS.PLANNED , MACROS.DUE, 6 );
@@ -142,7 +137,7 @@ public class Driver  {
 		this.trainer.addTraining( "Java", "Flipkart", 29000, new CDate(24,11,2018), MACROS.COMPLETED, MACROS.RECEIVED, 4 );
 		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019), MACROS.COMPLETED, MACROS.DUE, 2 );
 		
-		this.trainer.addTraining( "Data Structures", "Google", 76000, new CDate(14,2,2018), MACROS.CONFIRMED, MACROS.DUE,3 );
+		this.trainer.addTraining( "DataStructures", "Google", 76000, new CDate(14,2,2018), MACROS.CONFIRMED, MACROS.DUE,3 );
 		this.trainer.addTraining( "Java", "Oracle", 21999, new CDate(2,2,2020), MACROS.PLANNED, MACROS.DUE, 4 );
 		this.trainer.addTraining( "Python", "Pentagon", 66000, new CDate(23,12,2019), MACROS.COMPLETED, MACROS.DUE, 2 );
 		
@@ -150,7 +145,6 @@ public class Driver  {
 		this.trainer.addTraining( "Java", "Apple", 88888, new CDate(27,11,2019), MACROS.COMPLETED, MACROS.DUE, 4 );
 		this.trainer.addTraining( "SOLID", "DELL-EMC", 33000, new CDate(30,12,2019), MACROS.PLANNED, MACROS.DUE, 2 );
 		
-		return trainer;
 	}
 	
 	void showMenu(){

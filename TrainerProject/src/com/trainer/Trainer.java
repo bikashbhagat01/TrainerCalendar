@@ -12,16 +12,16 @@ public class Trainer implements TrainerAction{
 	// Received instance from Training Manager
 	Trainer() {
 		this.trainingManager = TrainingManager.getInstance();
-		this.trainingList = trainingManager.getTrainingMap().get(trainerID);
+		
 
 	}
 
-	/*
+	
 	Trainer(int tid) {
 		this.trainingManager = TrainingManager.getInstance();
 		this.trainerID = tid;
 		this.trainingList = trainingManager.getTrainingMap().get(trainerID);
-	} */
+	} 
 
 	
 	
@@ -30,15 +30,17 @@ public class Trainer implements TrainerAction{
 	}
 
 	public void setTrainerID(int trainerID) {
+		this.setTrainingList(trainerID);
 		this.trainerID = trainerID;
 	}
 
 	public List<Training> getTrainingList() {
-		return trainingList;
+		return this.trainingList;
 	}
 
 	public void setTrainingList(int trainerID) {
 		this.trainingList = trainingManager.getTrainingMap().get(trainerID);
+		System.out.println("Size" + this.trainingList.size());
 	}
 
 	
