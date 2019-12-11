@@ -1,7 +1,7 @@
 package com.trainer;
 import java.util.*;
 
-public class Driver implements MACROS {
+public class Driver  {
 
 	private Trainer trainer;
 	static Scanner sc = new Scanner(System.in);
@@ -136,19 +136,19 @@ public class Driver implements MACROS {
 	
 	Trainer initiator(){
 
-		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019),CONFIRMED ,DUE, 4);
-		this.trainer.addTraining( "SOLID", "Amazon", 50000, new CDate(1,12,2019),PLANNED , DUE, 6 );
-		this.trainer.addTraining( "DataStructures", "Google", 76000, new CDate(14,2,2018), CONFIRMED, DUE,3 );
-		this.trainer.addTraining( "Java", "Flipkart", 29000, new CDate(24,11,2018), COMPLETED, RECEIVED, 4 );
-		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019), COMPLETED, DUE, 2 );
+		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019),MACROS.CONFIRMED ,MACROS.DUE, 4);
+		this.trainer.addTraining( "SOLID", "Amazon", 50000, new CDate(1,12,2019),MACROS.PLANNED , MACROS.DUE, 6 );
+		this.trainer.addTraining( "DataStructures", "Google", 76000, new CDate(14,2,2018), MACROS.CONFIRMED, MACROS.DUE,3 );
+		this.trainer.addTraining( "Java", "Flipkart", 29000, new CDate(24,11,2018), MACROS.COMPLETED, MACROS.RECEIVED, 4 );
+		this.trainer.addTraining( "C++", "wipro", 28000, new CDate(12,9,2019), MACROS.COMPLETED, MACROS.DUE, 2 );
 		
-		this.trainer.addTraining( "Data Structures", "Google", 76000, new CDate(14,2,2018), CONFIRMED, DUE,3 );
-		this.trainer.addTraining( "Java", "Oracle", 21999, new CDate(2,2,2020), PLANNED, DUE, 4 );
-		this.trainer.addTraining( "Python", "Pentagon", 66000, new CDate(23,12,2019), COMPLETED, DUE, 2 );
+		this.trainer.addTraining( "Data Structures", "Google", 76000, new CDate(14,2,2018), MACROS.CONFIRMED, MACROS.DUE,3 );
+		this.trainer.addTraining( "Java", "Oracle", 21999, new CDate(2,2,2020), MACROS.PLANNED, MACROS.DUE, 4 );
+		this.trainer.addTraining( "Python", "Pentagon", 66000, new CDate(23,12,2019), MACROS.COMPLETED, MACROS.DUE, 2 );
 		
-		this.trainer.addTraining( "C++", "Amazon", 44440, new CDate(12,8,2019), COMPLETED, RECEIVED,3 );
-		this.trainer.addTraining( "Java", "Apple", 88888, new CDate(27,11,2019), COMPLETED, DUE, 4 );
-		this.trainer.addTraining( "SOLID", "DELL-EMC", 33000, new CDate(30,12,2019), PLANNED, DUE, 2 );
+		this.trainer.addTraining( "C++", "Amazon", 44440, new CDate(12,8,2019), MACROS.COMPLETED, MACROS.RECEIVED,3 );
+		this.trainer.addTraining( "Java", "Apple", 88888, new CDate(27,11,2019), MACROS.COMPLETED, MACROS.DUE, 4 );
+		this.trainer.addTraining( "SOLID", "DELL-EMC", 33000, new CDate(30,12,2019), MACROS.PLANNED, MACROS.DUE, 2 );
 		
 		return trainer;
 	}

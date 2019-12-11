@@ -1,6 +1,6 @@
 package com.trainer;
 
-public class Training implements Comparable<Training>,MACROS {
+public class Training implements Comparable<Training> {
 	private int trainingId;
 	private int trainerID;
 	private String courseName;
@@ -17,28 +17,28 @@ public class Training implements Comparable<Training>,MACROS {
 	public int compareTo(Training cmp){
 
 		switch(criteria){
-		case TRAININGIDBASE:
+		case MACROS.TRAININGIDBASE:
 			return (int)(this.trainingId - cmp.getTrainingId());
 		
-		case COURSEBASE:
+		case MACROS.COURSEBASE:
 			return (int)(this.courseName.compareToIgnoreCase(cmp.getCourseName()));
 		
-		case CLIENTBASE:
+		case MACROS.CLIENTBASE:
 			return (int) (this.clientName.compareToIgnoreCase(cmp.getClientName()));
 			
-		case COSTBASE:
+		case MACROS.COSTBASE:
 			return (int) (this.cost - cmp.getCost());
 			
-		case STATUSBASE:
+		case MACROS.STATUSBASE:
 			return (int) (this.status.compareToIgnoreCase(cmp.getStatus()));
 			
-		case PAYSTATEBASE:
+		case MACROS.PAYSTATEBASE:
 			return (int) (this.payState.compareToIgnoreCase(cmp.getPayState()));
 		
-		case DATEBASE:
+		case MACROS.DATEBASE:
 			return (int)(this.date.compareTo(cmp.getDate()));
 
-		case DURATIONBASE:
+		case MACROS.DURATIONBASE:
 			return (int)(this.duration - cmp.getDuration());
 			
 		default:

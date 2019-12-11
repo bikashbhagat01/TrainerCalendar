@@ -2,7 +2,7 @@ package com.trainer;
 
 // Interface with Constants
 
-public  interface MACROS {
+public  class MACROS {
 
 
 	public final static int TRAININGIDBASE = 1;

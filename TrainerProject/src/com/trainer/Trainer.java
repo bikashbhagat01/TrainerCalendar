@@ -1,7 +1,7 @@
 package com.trainer;
 import java.util.*;
 
-public class Trainer implements TrainerAction,MACROS{
+public class Trainer implements TrainerAction{
 	
 	private TrainingManager trainingManager;
 	private int trainerID;
@@ -137,7 +137,7 @@ public class Trainer implements TrainerAction,MACROS{
 		
 		for (Training tEntry : trainingList){
 			
-			if(tEntry.getStatus().equalsIgnoreCase(COMPLETED) && tEntry.getPayState().equalsIgnoreCase(DUE))
+			if(tEntry.getStatus().equalsIgnoreCase(MACROS.COMPLETED) && tEntry.getPayState().equalsIgnoreCase(MACROS.DUE))
 				pendingCostOnCompletedTrainings += tEntry.getCost();
 		}
 		
@@ -156,35 +156,35 @@ public class Trainer implements TrainerAction,MACROS{
 			
 				switch(criteriaFlag){
 				case "trainingid":
-					Training.setCriteria(TRAININGIDBASE);
+					Training.setCriteria(MACROS.TRAININGIDBASE);
 					break;
 					
 				case "course":
-					Training.setCriteria(COURSEBASE);
+					Training.setCriteria(MACROS.COURSEBASE);
 					break;
 					
 				case "client":
-					Training.setCriteria(CLIENTBASE);
+					Training.setCriteria(MACROS.CLIENTBASE);
 					break;
 					
 				case "cost":
-					Training.setCriteria(COSTBASE);
+					Training.setCriteria(MACROS.COSTBASE);
 					break;
 					
 				case "status":
-					Training.setCriteria(STATUSBASE);
+					Training.setCriteria(MACROS.STATUSBASE);
 					break;
 					
 				case "payementstatus":
-					Training.setCriteria(PAYSTATEBASE);
+					Training.setCriteria(MACROS.PAYSTATEBASE);
 					break;
 					
 				case "date":
-					Training.setCriteria(DATEBASE);
+					Training.setCriteria(MACROS.DATEBASE);
 					break;
 					
 				case "duration":
-					Training.setCriteria(DURATIONBASE);
+					Training.setCriteria(MACROS.DURATIONBASE);
 					break;
 					
 				default:
@@ -212,7 +212,7 @@ public class Trainer implements TrainerAction,MACROS{
 		
 		for (Training tEntry : trainingList){
 			
-			if(tEntry.getStatus().equalsIgnoreCase(PLANNED)){
+			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED)){
 					System.out.println(tEntry + "\n");
 					pFlag = true;
 			}
@@ -230,7 +230,7 @@ public class Trainer implements TrainerAction,MACROS{
 		
 		for (Training tEntry : trainingList){
 			
-			if(tEntry.getStatus().equalsIgnoreCase(PLANNED) && tEntry.getClientName().equalsIgnoreCase(courseName)){
+			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED) && tEntry.getClientName().equalsIgnoreCase(courseName)){
 					System.out.println(tEntry + "\n");
 					pFlag = true;
 			}
