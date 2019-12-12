@@ -18,7 +18,6 @@ public class Trainer implements TrainerAction{
 	} 
 
 	
-	
 	public int getTrainerID() {
 		return trainerID;
 	}
@@ -129,7 +128,7 @@ public class Trainer implements TrainerAction{
 				pendingCostOnCompletedTrainings += tEntry.getCost();
 		}
 		
-		System.out.println("Total Payement due ton Completed Trainings : " + pendingCostOnCompletedTrainings);
+		System.out.println("Total Payement due on Completed Trainings : " + pendingCostOnCompletedTrainings);
 	}
 
 	@Override
@@ -180,7 +179,7 @@ public class Trainer implements TrainerAction{
 					break;
 			}
 		
-		System.out.println("Sorted Based on Criteria : " + Training.getCriteria() + " | " + criteriaFlag);
+		System.out.println("Sorted Based on Criteria : " + Training.getCriteria() + " | " + criteriaFlag + "\n");
 			
 		Collections.sort(this.getMyTrainingList());
 		
@@ -218,7 +217,7 @@ public class Trainer implements TrainerAction{
 		
 		for (Training tEntry : this.getMyTrainingList()){
 			
-			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED) && tEntry.getClientName().equalsIgnoreCase(courseName)){
+			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED) && tEntry.getCourseName().equalsIgnoreCase(courseName)){
 					System.out.println(tEntry + "\n");
 					pFlag = true;
 			}

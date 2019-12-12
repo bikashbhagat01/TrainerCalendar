@@ -3,7 +3,7 @@ package com.trainer;
 import java.util.*;
 
 public class TrainingManager {
-	static int trainingId = 0; // Creates new Training IDs
+	static int trainingId = 1; // Creates new Training IDs
 	
 	//  List of Training for each Integer Trainer ID
 	

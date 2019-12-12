@@ -50,11 +50,20 @@ public class CDate implements Comparable<CDate>{
 	}
 	
 	public CDate(String dateS){
-		
+		/*
 		this.m_day = Integer.parseInt(dateS.substring(0,2));
 		this.m_month = Integer.parseInt(dateS.substring(3,5));
 		this.m_year = Integer.parseInt(dateS.substring(6));
+		*/
 		
+		String[] dateParts = dateS.split(("[/:-]"));
+
+		this.m_day = Integer.parseInt(dateParts[0]);
+		
+		this.m_month = Integer.parseInt(dateParts[1]);		
+		
+		this.m_year = (dateParts[2].length() != 2)?Integer.parseInt(dateParts[2]):2000+Integer.parseInt(dateParts[2]);
+		// If year is entered as 19, 2019 is returned
 	}
 	
 	public String toString() {

@@ -42,8 +42,10 @@ public class Training implements Comparable<Training> {
 			return (int)(this.duration - cmp.getDuration());
 			
 		default:
-			return 0;
-	}
+			return (int)(this.date.compareTo(cmp.getDate()));
+			
+			// Date is the default sorting criteria
+			}
 }
 	public String toString(){
 		
