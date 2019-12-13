@@ -15,3 +15,5 @@ Class containing information regarding each training entry
 # TrainingManager -  
 Defines a Map of training lists identified by trainer ID [ the key ]. Can only have one instance [Singleton]. 
 The Map acts as DB, where each key has a value [ Each Trainer has access to a list of Training entries for their TrainerID]
+# Driver -
+Application is run using the instance of a trainer.
