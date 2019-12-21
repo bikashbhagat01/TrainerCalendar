@@ -4,6 +4,7 @@ import java.util.concurrent.TimeUnit;
 public class Driver  {
 
 	private Trainer trainer;
+
 	static Scanner sc = new Scanner(System.in);
 
 	public Driver() {
@@ -21,6 +22,15 @@ public class Driver  {
 	static void showMessage(String message) {
 		System.out.println("========" + message + "=========");
 	}
+
+	static Map<String, SORT_TYPE> commandToSortMap = new HashMap<String, SORT_TYPE>() {
+		{
+			put("course", SORT_TYPE.COURSE_NAME);
+			put("cost", SORT_TYPE.COST);
+			put("date", SORT_TYPE.DATE);
+			put("client", SORT_TYPE.CLIENT_NAME);
+		}
+	};
 
 	void showMenu(){
 
@@ -92,6 +102,13 @@ public class Driver  {
 					this.trainer.displayCost(PAYMENT_STATE.DUE, TRAINING_STATUS.COMPLETED);
 					break;
 				case "g":
+					String criteria = getCriteria();
+					if(!commandToSortMap.containsKey(criteria)) {
+						System.out.println("Incorrect criteria entered");
+						break;
+					}
+					SORT_TYPE sort_type = commandToSortMap.get(criteria);
+					this.trainer.displayTrainings(sort_type);
 					break;
 				case "h":
 					this.trainer.displayTrainings(TRAINING_STATUS.PLANNED);

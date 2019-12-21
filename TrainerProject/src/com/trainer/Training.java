@@ -1,5 +1,9 @@
 package com.trainer;
 
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Training {
 	private int id;
 	private int trainerId;
@@ -17,11 +21,20 @@ public class Training {
 	private TRAINING_STATUS status;
 	private PAYMENT_STATE payState;
 
-
+	public static Map<SORT_TYPE, Comparator<Training>> sortMap = new HashMap<SORT_TYPE, Comparator<Training>>() {{
+		put(SORT_TYPE.PAYMENT_STATUS, new SortByPaymentState());
+		put(SORT_TYPE.TRAINING_ID, new SortByTrainingId());
+		put(SORT_TYPE.COURSE_NAME, new SortByCourseName());
+		put(SORT_TYPE.CLIENT_NAME, new SortByClientName());
+		put(SORT_TYPE.COST, new SortByClientName());
+		put(SORT_TYPE.STATUS, new SortByStatus());
+		put(SORT_TYPE.DATE, new SortByDate());
+		put(SORT_TYPE.DURATION, new SortByDuration());
+	}};
 
 	/* Constructor */
 
-	Training (TrainingBuilder tb) {
+	public Training (TrainingBuilder tb) {
 		this.id = tb.id;
 		this.trainerId = tb.trainerId;
 		this.cost = tb.cost;

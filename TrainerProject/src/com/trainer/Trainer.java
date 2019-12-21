@@ -113,7 +113,12 @@ public class Trainer implements TrainerAction{
 
 	@Override
 	public void displayTrainings(SORT_TYPE sortType) {
-
+		List<Training> trainings = this.getMyTrainingList();
+		Comparator<Training> comp = Training.sortMap.get(sortType);
+		Collections.sort(trainings, comp);
+		for (Training training: trainings) {
+			System.out.println(training);
+		}
 	}
 
 	@Override
