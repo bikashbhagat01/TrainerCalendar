@@ -29,6 +29,8 @@ public class Driver  {
 			put("cost", SORT_TYPE.COST);
 			put("date", SORT_TYPE.DATE);
 			put("client", SORT_TYPE.CLIENT_NAME);
+			put("trainingid", SORT_TYPE.TRAINING_ID);
+			put("duration", SORT_TYPE.DURATION);
 		}
 	};
 
@@ -59,6 +61,7 @@ public class Driver  {
 		String course = "", client;
 		double cost;
 		while (!exCode) {
+			loadScreen();
 			this.showMenu();
 			addTrack();
 			String choice = sc.next();
@@ -117,10 +120,15 @@ public class Driver  {
 					course = getCourse();
 					this.trainer.displayTrainings(TRAINING_STATUS.PLANNED, course);
 					break;
-
+				case "q":
+					exCode = true;
+					break;
+				default:
+					System.out.println("Incorrect Command Entered!!!!");
+					break;
 			}
-
 		}
+		System.out.println("Exit Successfull!!!!");
 	}
 
 
