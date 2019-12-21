@@ -43,22 +43,13 @@ public class TrainingManager {
 	}
 	
 	
-	Training addTraining(int trainerId, String courseName, String clientName, int cost,
-			CDate date, String status, String payState, int duration){
-		// Adding Training
-		
-		Training t = new Training();
-		
-		t.setTrainingId(TrainingManager.getNextTrainingId());
-		t.setTrainerID(trainerId);
-		t.setClientName(clientName);
-		t.setCourseName(courseName);
-		t.setCost(cost);
-		t.setDate(date);
-		t.setPayState(payState);
-		t.setStatus(status);
-		t.setDuration(duration);
-		 
+	Training addTraining(Training.TrainingBuilder tb){
+
+		tb.setBasicInfo(getNextTrainingId());
+
+		Training t = new Training(tb);
+
+		int trainerId = t.getTrainerId();
 		if (this.trainingMap.containsKey(trainerId)) {
 			this.trainingMap.get(trainerId).add(t);
 		}
@@ -67,7 +58,6 @@ public class TrainingManager {
 			train.add(t);
 			this.trainingMap.put(trainerId, train);
 		}
-	
 		return t;
 	}
 }

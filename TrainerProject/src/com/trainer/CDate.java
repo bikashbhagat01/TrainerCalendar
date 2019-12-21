@@ -49,7 +49,7 @@ public class CDate implements Comparable<CDate>{
 		this.m_year = year;
 	}
 	
-	public CDate(String dateS){
+	public CDate(String dateS) {
 		/*
 		this.m_day = Integer.parseInt(dateS.substring(0,2));
 		this.m_month = Integer.parseInt(dateS.substring(3,5));

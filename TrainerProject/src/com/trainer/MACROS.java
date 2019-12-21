@@ -1,23 +1,40 @@
 package com.trainer;
 
-// Interface with Constants
+enum SORT_TYPE {
+	TRAINING_ID,
+	COURSE_NAME,
+	CLIENT_NAME,
+	COST,
+	STATUS,
+	PAYMENT_STATUS,
+	DATE,
+	DURATION
+}
+enum PAYMENT_STATE {
+	DUE("DUE"), RECEIVED("RECEIVED");
+	private String state;
 
-public final class MACROS {
+	public String getState(){
+		return this.state;
+	}
 
+	PAYMENT_STATE(String s){
+		this.state = s;
+	}
+}
 
-	public final static int TRAININGIDBASE = 1;
-	public final static int COURSEBASE = 2;
-	public final static int CLIENTBASE = 3;
-	public final static int COSTBASE = 4;
-	public final static int STATUSBASE = 5;
-	public final static int PAYSTATEBASE = 6;
-	public final static int DATEBASE = 7;
-	public final static int DURATIONBASE = 8;
-	
+enum TRAINING_STATUS {
+	PLANNED("PLANNED"),
+	CONFIRMED("CONFIRMED"),
+	COMPLETED("COMPLETED");
 
-	public final static String DUE = "Due";
-	public final static String RECEIVED = "Received";
-	public final static String PLANNED = "Planned";
-	public final static String COMPLETED = "Completed";
-	public final static String CONFIRMED = "Confirmed";
+	private String state;
+
+	public String getState(){
+		return this.state;
+	}
+
+	TRAINING_STATUS(String s){
+		this.state = s;
+	}
 }

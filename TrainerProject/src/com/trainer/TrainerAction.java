@@ -2,16 +2,28 @@ package com.trainer;
 
 // Interface to Implement all Actions that a Trainer can take on their calendar
 public interface TrainerAction {
-	int getTrainingCountWithinDates(CDate start, CDate end);
-	double getTotalCostOfTrainingWithinDates(CDate start, CDate end);
-	double getTotalCostOfTrainingWithCourseName(String courseName);
-	void displayTrainingInfoWithinDates(CDate start, CDate end, String course);
-	void displayTotalCountOfTrainingsForClient(String client);
-	void displayPendingCostOnCompletedTrainings();
-	void sortAllTrainings(String criteria);
-	void displayPlannedTrainings();
-	void displayPlannedTrainings(String courseName);
-	void addTraining(String courseName, String clientName, int cost, CDate date, String status, String payState, int duration);
+
+	/* Get total cost */
+	double getTotalCostOfTraining(CDate start, CDate end);
+	double getTotalCostOfTraining(String courseName);
+
+	/* Displays training based on different criteria */
+	void displayTrainings(TRAINING_STATUS state);
+	void displayTrainings(TRAINING_STATUS state, String courseName);
+	void displayTrainings(CDate start, CDate end, String courseName);
+	void displayTrainings(SORT_TYPE sorType);
+
+	/* Count training with different parameters */
+	void displayTrainingCount(CDate start, CDate end);
+	void displayTrainingCount(String client);
+	void displayTrainingCount();
+
+	/* Display total cost */
+	void displayCost(PAYMENT_STATE payState, TRAINING_STATUS trainingStatus);
+
+
+	/* dekhte h */
+	void addTraining(Training.TrainingBuilder tb);
 }
 
 

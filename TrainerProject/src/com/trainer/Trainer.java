@@ -2,239 +2,171 @@ package com.trainer;
 import java.util.*;
 
 public class Trainer implements TrainerAction{
-	
-	private TrainingManager trainingManager;
-	private int trainerID;
 
-	// Received instance from Training Manager
+	private int id;
+	private TrainingManager tm;
+
+	/* Constructor */
+
 	Trainer() {
-		this.trainingManager = TrainingManager.getInstance();
+		this.tm = TrainingManager.getInstance();
 	}
 
-	
 	Trainer(int tid) {
-		this.trainingManager = TrainingManager.getInstance();
-		this.trainerID = tid;
-	} 
-
-	
-	public int getTrainerID() {
-		return trainerID;
+		this.id = tid;
+		this.tm = TrainingManager.getInstance();
 	}
 
-	public void setTrainerID(int trainerID) {
-		this.trainerID = trainerID;
+	/* Getter and Setter Methods */
+
+	public int getId() {
+		return id;
 	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/* Member Methods */
 
 	public List<Training> getMyTrainingList(){
-		return this.trainingManager.getTrainingMap().get(this.trainerID);
+		return this.tm.getTrainingMap().get(this.id);
 	}
 
-	@Override
-	public int getTrainingCountWithinDates(CDate start, CDate end) {
 
-			int countOfTrainings = 0;
-		for (Training tEntry : this.getMyTrainingList()){
-			
-			boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
-			boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
-			
-			if(flagStart && flagEnd){
-				countOfTrainings++;
+	@Override
+	public double getTotalCostOfTraining(CDate start, CDate end) {
+		List<Training> trainings = this.getMyTrainingList();
+		double totalCost = 0;
+		for (Training training: trainings) {
+			CDate tDate = training.getDate();
+			if(tDate.compareTo(start) >= 0 && tDate.compareTo(end) <= 0) {
+				totalCost += training.getCost();
 			}
 		}
-		return countOfTrainings;
-		
+		return totalCost;
 	}
-	
 
 	@Override
-	public double getTotalCostOfTrainingWithinDates(CDate start, CDate end) {
-		// TODO Auto-generated method stub
-			
-			double costOfTrainings = 0;
-			
-			for (Training tEntry : this.getMyTrainingList()){
-			
-			boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
-			boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
-			
-			if(flagStart && flagEnd){
-				costOfTrainings += tEntry.getCost();
+	public double getTotalCostOfTraining(String courseName) {
+		List<Training> trainings = this.getMyTrainingList();
+		double totalCost = 0;
+		for (Training training: trainings) {
+			if(training.getCourseName().equalsIgnoreCase(courseName)){
+				totalCost += training.getCost();
 			}
 		}
-		return costOfTrainings;
+		return totalCost;
 	}
 
 	@Override
-	public double getTotalCostOfTrainingWithCourseName(String courseName) {
-		// TODO Auto-generated method stub
-		double costOfTrainings = 0;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-		
-		if(tEntry.getCourseName().equalsIgnoreCase(courseName)){
-			costOfTrainings += tEntry.getCost();
-		}
-	}
-	return costOfTrainings;
-}
-
-	@Override
-	public void displayTrainingInfoWithinDates(CDate start, CDate end, String course) {
-		// TODO Auto-generated method stub
-			
-		System.out.println("Trainings between " + start + " and " + end + "\n");
-		
-		boolean nFlag = false;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-		
-		boolean flagStart = tEntry.getDate().compareTo(start) >= 0; //Checks if current date is greater than start or not
-		boolean flagEnd = tEntry.getDate().compareTo(end) <= 0; //Checks if current date is less than end date or not
-		
-		if(flagStart && flagEnd && tEntry.getCourseName().equalsIgnoreCase(course.trim())){
-			System.out.println(tEntry + "\n");
-			nFlag = true;
-		}
-	}
-		if(!nFlag)
-			System.out.println("No Results found!");
-}
-
-	@Override
-	public void displayTotalCountOfTrainingsForClient(String client) {
-		// TODO Auto-generated method stub
-		int countOfTraining = 0;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-		
-		if(tEntry.getClientName().equalsIgnoreCase(client)){
-			countOfTraining++;
-		}
-	}
-			System.out.println("Total count of Trainings done for Client : "+ client + " is : " + countOfTraining);
-	}
-
-	@Override
-	public void displayPendingCostOnCompletedTrainings() {
-		// TODO Auto-generated method stub
-		
-		double pendingCostOnCompletedTrainings = 0;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-			
-			if(tEntry.getStatus().equalsIgnoreCase(MACROS.COMPLETED) && tEntry.getPayState().equalsIgnoreCase(MACROS.DUE))
-				pendingCostOnCompletedTrainings += tEntry.getCost();
-		}
-		
-		System.out.println("Total Payement due on Completed Trainings : " + pendingCostOnCompletedTrainings);
-	}
-
-	@Override
-	public void sortAllTrainings(String criteria) {
-		// TODO Auto-generated method stub
-		// Use Collections.Sort Library to implement sorting based on criteria as set on constants.
-		// CompareTo defined in Training Class
-		// Use Switch Case
-					
-			String criteriaFlag = criteria.toLowerCase().trim();
-			
-			
-				switch(criteriaFlag){
-				case "trainingid":
-					Training.setCriteria(MACROS.TRAININGIDBASE);
-					break;
-					
-				case "course":
-					Training.setCriteria(MACROS.COURSEBASE);
-					break;
-					
-				case "client":
-					Training.setCriteria(MACROS.CLIENTBASE);
-					break;
-					
-				case "cost":
-					Training.setCriteria(MACROS.COSTBASE);
-					break;
-					
-				case "status":
-					Training.setCriteria(MACROS.STATUSBASE);
-					break;
-					
-				case "payementstatus":
-					Training.setCriteria(MACROS.PAYSTATEBASE);
-					break;
-					
-				case "date":
-					Training.setCriteria(MACROS.DATEBASE);
-					break;
-					
-				case "duration":
-					Training.setCriteria(MACROS.DURATIONBASE);
-					break;
-					
-				default:
-					System.out.println("Previous criteria remains as incorrect criteria entered ");
-					break;
-			}
-		
-		System.out.println("Sorted Based on Criteria : " + Training.getCriteria() + " | " + criteriaFlag + "\n");
-			
-		Collections.sort(this.getMyTrainingList());
-		
-		for(Training tEntry : this.getMyTrainingList()){
-			
-			System.out.println(tEntry + "\n");
-			
-		}
-		
-	}
-
-	@Override
-	public void displayPlannedTrainings() {
-		// TODO Auto-generated method stub
-		
-		boolean pFlag = false;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-			
-			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED)){
-					System.out.println(tEntry + "\n");
-					pFlag = true;
+	public void displayTrainings(TRAINING_STATUS state) {
+		List<Training> trainings = this.getMyTrainingList();
+		boolean isFound = false;
+		for (Training training: trainings) {
+			if(training.getStatus() == state) {
+				isFound = true;
+				System.out.println(training);
 			}
 		}
-		
-		if(!pFlag)
-			System.out.println("No Planned Training Found!!!");
+
+		if(!isFound) {
+			System.out.println("No trainings found");
+		}
+
 	}
 
 	@Override
-	public void displayPlannedTrainings(String courseName) {
-		// TODO Auto-generated method stub
-		
-		boolean pFlag = false;
-		
-		for (Training tEntry : this.getMyTrainingList()){
-			
-			if(tEntry.getStatus().equalsIgnoreCase(MACROS.PLANNED) && tEntry.getCourseName().equalsIgnoreCase(courseName)){
-					System.out.println(tEntry + "\n");
-					pFlag = true;
+	public void displayTrainings(TRAINING_STATUS state, String courseName) {
+		List<Training> trainings = this.getMyTrainingList();
+		boolean isFound = false;
+		for (Training training: trainings) {
+			if(training.getStatus() == state && training.getCourseName().equalsIgnoreCase(courseName)){
+				isFound = true;
+				System.out.println(training);
 			}
 		}
-		
-		if(!pFlag)
-			System.out.println("No Planned Training Found for course : " + courseName);
-		
+		if (!isFound) {
+			System.out.println("No trainings found");
+		}
 	}
 
 	@Override
-	public void addTraining(String courseName, String clientName, int cost,
-			CDate date, String status, String payState, int duration) {
-		// TODO Auto-generated method stub
-		
-		this.trainingManager.addTraining(this.trainerID, courseName, clientName, cost, date, status, payState, duration);
-		
-	}	
-	
+	public void displayTrainings(CDate start, CDate end, String courseName) {
+		List<Training> trainings = this.getMyTrainingList();
+		boolean isFound = false;
+		for (Training training: trainings) {
+			CDate date = training.getDate();
+			boolean isInRange = date.compareTo(start) >= 0 && date.compareTo(end) <= 0;
+			boolean isCourseMatched = training.getCourseName().equalsIgnoreCase(courseName);
+
+			if(isInRange && isCourseMatched) {
+				isFound = true;
+				System.out.println(training);
+			}
+		}
+
+		if (!isFound) {
+			System.out.println("Training not found");
+		}
+	}
+
+	@Override
+	public void displayTrainings(SORT_TYPE sortType) {
+
+	}
+
+	@Override
+	public void displayTrainingCount(CDate start, CDate end) {
+		List<Training> trainings = this.getMyTrainingList();
+		int trainingCount = 0;
+		for (Training training: trainings) {
+			CDate date = training.getDate();
+			boolean isInRange = date.compareTo(start) >= 0 && date.compareTo(end) <=0;
+			if (isInRange) {
+				trainingCount++;
+			}
+		}
+
+		System.out.println("Training count for dates are: " + trainingCount);
+	}
+
+	@Override
+	public void displayTrainingCount(String client) {
+		List<Training> trainings = this.getMyTrainingList();
+		int trainingCount = 0;
+		for (Training training: trainings) {
+			if(training.getClientName().equalsIgnoreCase(client)){
+				trainingCount++;
+			}
+		}
+
+		System.out.println("Training count for client are: " + trainingCount);
+	}
+
+	@Override
+	public void displayTrainingCount() {
+		List<Training> trainings = this.getMyTrainingList();
+
+		System.out.println("Total trainings are: " + trainings.size());
+	}
+
+	@Override
+	public void displayCost(PAYMENT_STATE payState, TRAINING_STATUS trainingStatus) {
+		List<Training> trainings = this.getMyTrainingList();
+		double totalCost = 0;
+		for (Training training: trainings) {
+			if (training.getPayState() == payState && training.getStatus() == trainingStatus) {
+				totalCost += training.getCost();
+			}
+		}
+
+		System.out.println("Total Cost for states: " + totalCost);
+	}
+
+	@Override
+	public void addTraining(Training.TrainingBuilder tb) {
+		tb.setTrainerId(this.id);
+		this.tm.addTraining(tb);
+	}
 }
