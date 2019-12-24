@@ -20,8 +20,8 @@ Uses Map of Lists. [ Each Trainer has access to a list of Training entries for t
 Application is run using the instance of a trainer defined in driver.
 
 
-Problem Statement :
-Training Calendar
+# Problem Statement : Training Calendar
+
 Create a training calendar for trainers. The application will be used to store
 information about upcoming trainings, their cost, clients, etc. It will help the
 trainers manage their trainings from different sources.
