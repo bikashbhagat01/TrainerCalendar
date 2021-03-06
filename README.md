@@ -1,5 +1,5 @@
 # TrainerCalendar
-A trainer Calendar Project to implement OOPs and SOLID Principles
+A Trainer Calendar Project to implement OOPs and SOLID Principles
 
 
 # CDate - 
